@@ -1,47 +1,29 @@
-# `PACKAGE_NAME`
+# `PROJECT_NAME`
 
-[![](https://img.shields.io/pypi/v/PACKAGE_NAME.svg?style=flat)](https://pypi.org/pypi/PACKAGE_NAME/)
-[![](https://img.shields.io/pypi/dw/PACKAGE_NAME.svg?style=flat)](https://pypi.org/pypi/PACKAGE_NAME/)
-[![](https://img.shields.io/pypi/pyversions/PACKAGE_NAME.svg?style=flat)](https://pypi.org/pypi/PACKAGE_NAME/)
-[![](https://img.shields.io/pypi/format/PACKAGE_NAME.svg?style=flat)](https://pypi.org/pypi/PACKAGE_NAME/)
-[![](https://img.shields.io/pypi/l/PACKAGE_NAME.svg?style=flat)](https://github.com/dawsonbooth/PACKAGE_NAME/blob/master/LICENSE)
 
 # Description
 
-This is a short or long textual description of the package.
+This is a short or long textual description of the project.
 
 # Installation
 
-With [Python](https://www.python.org/downloads/) installed, simply run the following command to add the package to your project.
+With [Git](https://git-scm.com/downloads), [Python](https://www.python.org/downloads/), and [Poetry](https://python-poetry.org/docs/) installed, simply run the following command to get the project on your machine.
 
 ```bash
-pip install PACKAGE_NAME
+git clone https://github.com/dawsonbooth/PROJECT_NAME
 ```
 
 # Usage
 
-The following is an example usage of the package:
-
-```python
-from foo import bar
-
-print("Ok here we go")
-
-try:
-    bar()
-except:
-    print("Ah good effort")
-```
-
-Some info about calling the program.
+The following is an example usage of the project:
 
 ```bash
-python whatever.py > out.txt
+python src/main.py > out.txt
 ```
-Then some output (console or file whatever)
+The `out.txt` file then contains:
 
 ```txt
-Output here I guess
+Hello world!
 ```
 
 # License
