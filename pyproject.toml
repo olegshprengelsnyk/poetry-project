@@ -2,7 +2,7 @@
 name = "PROJECT_NAME"
 version = "0.0.1"
 description = ""
-authors = ["Dawson Booth <pypi@dawsonbooth.com>"]
+authors = ["Dawson Booth <github@dawsonbooth.com>"]
 license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/dawsonbooth/PROJECT_NAME"
@@ -17,9 +17,6 @@ classifiers = [
 include = [
     "LICENSE",
 ]
-
-[tool.poetry.scripts]
-PROJECT_NAME = 'console:main'
 
 [tool.poetry.dependencies]
 python = "^3.5"
