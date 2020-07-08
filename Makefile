@@ -17,7 +17,7 @@ endif
 
 FILENAME = PACKAGE_NAME-$(VERSION)-$(PLATFORM)
 
-BUILDFLAGS = --onefile --name $(FILENAME) --windowed
+BUILDFLAGS = --onefile --name $(FILENAME)
 
 all: list
 
