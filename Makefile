@@ -31,6 +31,9 @@ clean:
 	rm -rf build/ dist/ src/__pycache__/
 	rm -f *.spec
 
+tag:
+	git tag v$(VERSION)
+
 build:
 	@poetry run pyinstaller $(BUILDFLAGS) $(SOURCE)
 
