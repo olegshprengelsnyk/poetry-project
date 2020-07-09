@@ -28,8 +28,8 @@ list:
 		}' | grep -v '__\$$' | grep -v 'make\[1\]' | grep -v 'Makefile' | sort"
 
 clean:
-	rm -rf build/ dist/ src/__pycache__/
-	rm -f *.spec
+	rm -rf build/ dist/ **/__pycache__/
+	rm -f *.spec **/*.pyc
 
 release:
 	git tag v$(VERSION)
