@@ -1,11 +1,11 @@
 # `PROJECT_NAME`
 
 
-# Description
+## Description
 
 This is a short or long textual description of the project.
 
-# Installation
+## Installation
 
 With [Git](https://git-scm.com/downloads), [Python](https://www.python.org/downloads/), and [Poetry](https://python-poetry.org/docs/) installed, simply run the following command to get the project on your machine.
 
@@ -13,7 +13,7 @@ With [Git](https://git-scm.com/downloads), [Python](https://www.python.org/downl
 git clone https://github.com/dawsonbooth/PROJECT_NAME
 ```
 
-# Usage
+## Usage
 
 The following is an example usage of the project:
 
@@ -26,6 +26,6 @@ The `out.txt` file then contains:
 Hello world!
 ```
 
-# License
+## License
 
 This software is released under the terms of [MIT license](LICENSE).
