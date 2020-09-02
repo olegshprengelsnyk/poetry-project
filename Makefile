@@ -19,6 +19,8 @@ FILENAME = PROJECT_NAME-$(VERSION)-$(PLATFORM)
 
 BUILDFLAGS = --onefile --name $(FILENAME)
 
+.PHONY = all list clean release build version
+
 all: list
 
 list:
@@ -30,7 +32,7 @@ list:
 clean:
 	rm -rf build/ dist/
 	rm -f *.spec
-	pyclean .
+	@poetry run pyclean .
 
 release:
 	git tag v$(VERSION)
