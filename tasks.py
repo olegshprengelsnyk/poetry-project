@@ -31,8 +31,10 @@ def build(c):
     clean(c)
 
     # Create filename
-    version = c.run("poetry version -s").stdout
+    version = c.run("poetry version -s").stdout.rstrip()
     filename = f"PROJECT_NAME-{version}-{sys.platform}"
+
+    print(filename)
 
     # Build exe with Pyinstaller
     c.run(
@@ -41,7 +43,7 @@ def build(c):
 
 @task
 def release(c):
-    version = c.run("poetry version -s").stdout
+    version = c.run("poetry version -s").stdout.rstrip()
 
     c.run(f"git tag v{version}")
     c.run(f"git push origin v{version}")
