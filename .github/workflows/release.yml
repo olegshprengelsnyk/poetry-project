@@ -25,7 +25,7 @@ jobs:
       - name: Build project
         id: build
         run: |
-          inv build
+          poetry run inv build
           echo "::set-output name=filename::$(ls dist)"
         shell: bash
       - name: Upload release file
@@ -52,7 +52,7 @@ jobs:
       - name: Build project
         id: build
         run: |
-          inv build
+          poetry run inv build
           echo "::set-output name=filename::$(ls dist)"
         shell: bash
       - name: Upload release file
@@ -79,7 +79,7 @@ jobs:
       - name: Build project
         id: build
         run: |
-          inv build
+          poetry run inv build
           echo "::set-output name=filename::$((Get-ChildItem -Path "./dist" | Select-Object -First 1).Name)"
         shell: pwsh
       - name: Upload release file
