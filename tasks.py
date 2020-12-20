@@ -16,9 +16,7 @@ def remove(path: str):
 def clean(c):
     c.run("pyclean .")
 
-    name, _ = c.run("poetry version").stdout.split()
-
-    remove(f"{name}.spec")
+    remove("PROJECT_NAME.spec")
     remove("dist")
 
 
@@ -33,8 +31,8 @@ def build(c):
     clean(c)
 
     # Create filename
-    name, version = c.run("poetry version").stdout.split()
-    filename = f"{name}-{version}-{sys.platform}"
+    version = c.run("poetry version -s").stdout
+    filename = f"PROJECT_NAME-{version}-{sys.platform}"
 
     # Build exe with Pyinstaller
     c.run(
@@ -43,7 +41,7 @@ def build(c):
 
 @task
 def release(c):
-    _, version = c.run("poetry version").stdout.split()
+    version = c.run("poetry version -s").stdout
 
     c.run(f"git tag v{version}")
     c.run(f"git push origin v{version}")
