@@ -1,3 +1,6 @@
+from sys import exit
+
+
 def main() -> int:
     # Perform operations
     print('Hello world!')
