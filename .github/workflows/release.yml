@@ -22,7 +22,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install poetry
       - name: Create release
-        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -48,11 +47,13 @@ jobs:
         run: |
           poetry run inv build
       - name: Upload release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           poetry run inv upload
 
   MacOS:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     needs: [Create Release]
 
     steps:
@@ -71,11 +72,13 @@ jobs:
         run: |
           poetry run inv build
       - name: Upload release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           poetry run inv upload
 
   Windows:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: [Create Release]
 
     steps:
@@ -94,5 +97,7 @@ jobs:
         run: |
           poetry run inv build
       - name: Upload release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           poetry run inv upload
