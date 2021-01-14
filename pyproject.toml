@@ -19,13 +19,12 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.8"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.3.2"
-pyinstaller = "^3.6"
-rope = "^0.17.0"
-
+pytest = "^6.2.1"
+rope = "^0.18.0"
+pyinstaller = "^4.2"
 macholib = { version = "^1.8", markers = "sys_platform == 'darwin'" }
 pefile = { version = "^2017.8.1", markers = "sys_platform == 'win32'" }
 pywin32-ctypes = { version = "^0.2.0", markers = "sys_platform == 'win32'" }
