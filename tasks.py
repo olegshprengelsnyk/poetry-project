@@ -31,6 +31,11 @@ def lint(c):
 
 
 @task
+def type_check(c):
+    c.run("mypy src --ignore-missing-imports")
+
+
+@task
 def build(c):
     # Clean previous build
     clean(c)

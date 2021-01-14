@@ -33,6 +33,7 @@ pefile = { version = "^2017.8.1", markers = "sys_platform == 'win32'" }
 pywin32-ctypes = { version = "^0.2.0", markers = "sys_platform == 'win32'" }
 pyclean = "^2.0.0"
 invoke = "^1.4.1"
+mypy = "^0.790"
 
 [build-system]
 requires = ["poetry>=0.12"]
