@@ -26,8 +26,13 @@ def clean(c):
 
 
 @task
+def format(c):
+    c.run("black src --line-length 119")
+
+
+@task
 def lint(c):
-    c.run("pylint src")
+    c.run("flake8 src --max-line-length 119 --extend-ignore E203")
 
 
 @task
@@ -47,9 +52,7 @@ def build(c):
     print(filename)
 
     # Build exe with Pyinstaller
-    c.run(
-        f"python -O -m PyInstaller --clean --onefile --name {filename} -y src/main.py"
-    )
+    c.run(f"python -O -m PyInstaller --clean --onefile --name {filename} -y src/main.py")
 
 
 @task
@@ -66,9 +69,7 @@ def release(c):
     version = c.run("poetry version -s").stdout.rstrip()
 
     # Create release
-    c.run(
-        f"gh release create v{version} -t 'PROJECT_NAME v{version}'"
-    )
+    c.run(f"gh release create v{version} -t 'PROJECT_NAME v{version}'")
 
 
 @task
@@ -78,6 +79,4 @@ def upload(c):
     filename = next(Path("dist").iterdir()).name
 
     # Upload release
-    c.run(
-        f"gh release upload v{version} dist/{filename}"
-    )
+    c.run(f"gh release upload v{version} dist/{filename}")
