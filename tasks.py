@@ -27,6 +27,7 @@ def clean(c):
 
 @task
 def format(c):
+    c.run("isort src --line-length 119 --profile black")
     c.run("black src --line-length 119")
 
 
