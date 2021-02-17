@@ -1,83 +1,106 @@
 import os
+import platform
 import shutil
 import sys
 from pathlib import Path
 
-from invoke import task
+from invoke import call, task
+from invoke.context import Context
+from invoke.runners import Result
+
+ROOT = Path(__file__).parent
 
 
 def remove(path: str):
     if os.path.isdir(path):
-        shutil.rmtree(path)
+        shutil.rmtree(path, ignore_errors=True)
     elif os.path.isfile(path):
         os.remove(path)
 
 
+def _run(c: Context, command: str) -> Result:
+    return _run(c, command, pty=platform.system() != "Windows")
+
+
 @task
+def clean_build(c):
+    """Clean up build"""
+    version = _run(c, "poetry version -s").stdout.rstrip()
+
+    os.remove(ROOT / f"PROJECT_NAME-{version}-{sys.platform}.spec")
+    shutil.rmtree(ROOT / "build", ignore_errors=True)
+    shutil.rmtree(ROOT / "dist", ignore_errors=True)
+
+
+@task
+def clean_python(c):
+    """Clean up python file artifacts"""
+    _run(c, f"pyclean {ROOT}")
+
+
+@task
+def clean_type_checking(c):
+    """Clean up files from type-checking"""
+    shutil.rmtree(ROOT / ".mypy_cache", ignore_errors=True)
+
+
+@task(pre=[clean_build, clean_python, clean_type_checking])
 def clean(c):
-    c.run("pyclean .")
-
-    version = c.run("poetry version -s").stdout.rstrip()
-    filename = f"PROJECT_NAME-{version}-{sys.platform}"
-
-    remove(f"{filename}.spec")
-    remove("build")
-    remove("dist")
+    """Run all clean sub-tasks"""
 
 
-@task
-def format(c):
-    c.run("isort src --line-length 119 --profile black")
-    c.run("black src --line-length 119")
-
-
-@task
-def lint(c):
-    c.run("flake8 src --max-line-length 119 --extend-ignore E203")
+@task(name="format", help={"check": "Checks if source is formatted without applying changes"})
+def format_(c, check=False):
+    """Format code"""
+    isort_options = ["--check-only", "--diff"] if check else []
+    _run(c, f"isort {ROOT / 'src'} {' '.join(isort_options)}")
+    black_options = ["--diff", "--check"] if check else ["--quiet"]
+    _run(c, f"black {ROOT / 'src'} {' '.join(black_options)}")
 
 
 @task
 def type_check(c):
-    c.run("mypy src --ignore-missing-imports")
+    """Run type-checking"""
+    _run(c, f"mypy {ROOT / 'src'} --ignore-missing-imports")
 
 
-@task
+@task(pre=[call(format_, check=True), type_check])
+def lint(c):
+    """Run all linting"""
+    _run(c, f"flake8 {ROOT / 'src'} --max-line-length 119 --extend-ignore E203,W503")
+
+
+@task(pre=[clean_build])
 def build(c):
-    # Clean previous build
-    clean(c)
-
-    # Build filename
-    version = c.run("poetry version -s").stdout.rstrip()
+    """Build project distributable"""
+    version = _run(c, "poetry version -s").stdout.rstrip()
     filename = f"PROJECT_NAME-{version}-{sys.platform}"
 
-    print(filename)
-
-    # Build exe with Pyinstaller
-    c.run(f"python -O -m PyInstaller --clean --onefile --name {filename} -y src/main.py")
+    _run(c, f"python -O -m PyInstaller --clean --onefile --name {filename} -y src/main.py")
 
 
 @task
 def tag(c):
-    version = c.run("poetry version -s").stdout.rstrip()
+    """Create GitHub tag"""
+    version = _run(c, "poetry version -s").stdout.rstrip()
 
-    c.run(f"git tag v{version}")
-    c.run(f"git push origin v{version}")
+    _run(c, f'git commit -m "v{version}"')
+    _run(c, f"git tag v{version}")
+    _run(c, f"git push origin v{version}")
 
 
 @task
 def release(c):
-    # Get version
-    version = c.run("poetry version -s").stdout.rstrip()
+    """Create GitHub release"""
+    version = _run(c, "poetry version -s").stdout.rstrip()
 
-    # Create release
-    c.run(f"gh release create v{version} -t 'PROJECT_NAME v{version}'")
+    _run(c, f"gh release create v{version} -t 'PROJECT_NAME v{version}'")
 
 
 @task
 def upload(c):
-    # Build filename
-    version = c.run("poetry version -s").stdout.rstrip()
+    """Upload build as GitHub release"""
+    version = _run(c, "poetry version -s").stdout.rstrip()
     filename = next(Path("dist").iterdir()).name
 
-    # Upload release
-    c.run(f"gh release upload v{version} dist/{filename}")
+    _run(c, f"gh release upload v{version} dist/{filename}")
