@@ -93,7 +93,7 @@ def release(c):
     """Create GitHub release"""
     version = _run(c, "poetry version -s").stdout.rstrip()
 
-    _run(c, f"gh release create v{version} -t 'PROJECT_NAME v{version}'")
+    _run(c, f'gh release create v{version} -t "PROJECT_NAME v{version}"')
 
 
 @task
