@@ -32,7 +32,7 @@ jobs:
   upload:
     name: Build and upload ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    needs: [release]
+    needs: [create]
     strategy:
       fail-fast: false
       matrix:
