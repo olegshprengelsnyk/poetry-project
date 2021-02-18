@@ -1,3 +1,4 @@
+import contextlib
 import os
 import platform
 import shutil
@@ -11,13 +12,6 @@ from invoke.runners import Result
 ROOT = Path(__file__).parent
 
 
-def remove(path: str):
-    if os.path.isdir(path):
-        shutil.rmtree(path, ignore_errors=True)
-    elif os.path.isfile(path):
-        os.remove(path)
-
-
 def _run(c: Context, command: str) -> Result:
     return c.run(command, pty=platform.system() != "Windows")
 
@@ -27,7 +21,8 @@ def clean_build(c):
     """Clean up build"""
     version = _run(c, "poetry version -s").stdout.rstrip()
 
-    os.remove(ROOT / f"PROJECT_NAME-{version}-{sys.platform}.spec")
+    with contextlib.suppress(FileNotFoundError):
+        os.remove(ROOT / f"PROJECT_NAME-{version}-{sys.platform}.spec")
     shutil.rmtree(ROOT / "build", ignore_errors=True)
     shutil.rmtree(ROOT / "dist", ignore_errors=True)
 
