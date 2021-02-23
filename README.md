@@ -10,7 +10,7 @@ This is a short or long textual description of the project.
 With [Git](https://git-scm.com/downloads), [Python](https://www.python.org/downloads/), and [Poetry](https://python-poetry.org/docs/) installed, simply run the following command to get the project on your machine.
 
 ```bash
-git clone https://github.com/dawsonbooth/PROJECT_NAME
+git clone https://github.com/dawsonbooth/REPO_NAME
 ```
 
 ## Usage

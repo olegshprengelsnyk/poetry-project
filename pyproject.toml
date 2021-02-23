@@ -2,7 +2,7 @@
 name = "PROJECT_NAME"
 version = "0.3.5"
 authors = ["Dawson Booth <github@dawsonbooth.com>"]
-homepage = "https://github.com/dawsonbooth/PROJECT_NAME"
+homepage = "https://github.com/dawsonbooth/REPO_NAME"
 
 [tool.poetry.dependencies]
 python = "^3.8"
