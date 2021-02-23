@@ -32,7 +32,7 @@ def clean_build(c):
 @task
 def clean_python(c):
     """Clean up python file artifacts"""
-    _run(c, f"pyclean {ROOT}")
+    _run(c, f"pyclean {SRC}")
 
 
 @task
