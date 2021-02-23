@@ -1,22 +1,8 @@
 [tool.poetry]
 name = "PROJECT_NAME"
-version = "0.3.4"
-description = ""
+version = "0.3.5"
 authors = ["Dawson Booth <github@dawsonbooth.com>"]
-license = "MIT"
-readme = "README.md"
 homepage = "https://github.com/dawsonbooth/PROJECT_NAME"
-repository = "https://github.com/dawsonbooth/PROJECT_NAME"
-keywords = []
-classifiers = [
-    "Environment :: Console",
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-]
-include = [
-    "LICENSE",
-]
 
 [tool.poetry.dependencies]
 python = "^3.8"
