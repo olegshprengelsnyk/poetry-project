@@ -1,6 +1,7 @@
 [tool.poetry]
 name = "PROJECT_NAME"
 version = "0.3.5"
+description = ""
 authors = ["Dawson Booth <github@dawsonbooth.com>"]
 homepage = "https://github.com/dawsonbooth/REPO_NAME"
 
