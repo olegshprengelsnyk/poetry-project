@@ -9,7 +9,7 @@ homepage = "https://github.com/dawsonbooth/REPO_NAME"
 python = ">=3.8,<3.11"
 
 
-[tool.poetry.group.test.dev-dependencies]
+[tool.poetry.group.test.dependencies]
 autoflake = "^1.4"
 black = "^21.12b0"
 dustpan = "^0.3.2"
