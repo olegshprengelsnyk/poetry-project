@@ -7,6 +7,9 @@ homepage = "https://github.com/dawsonbooth/REPO_NAME"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.11"
+
+
+[tool.poetry.group.test.dev-dependencies]
 autoflake = "^1.4"
 black = "^21.12b0"
 dustpan = "^0.3.2"
@@ -16,9 +19,6 @@ isort = "^5.10.1"
 mypy = "^0.930"
 pyinstaller = "^4.7"
 rope = "^0.22.0"
-
-[tool.poetry.dev-dependencies]
-
 
 [tool.black]
 line-length = 119
